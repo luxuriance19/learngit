@@ -1,0 +1,4 @@
+git remote add orgin git@github.com:****/**.git  # orgin 代表远程master,可以替换为其他名字
+git push -u origin master  ## -u代表传送内容以及关联本地master和远程master
+上条指令之后,后面不需要-u指令
+git push origin master
