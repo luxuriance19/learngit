@@ -1,0 +1,74 @@
+git checkout -- file (工作区退回)
+git add file(工作区到缓存区)
+git commit -m ""(message 写入)
+git reset HEAD file (工作区退回)
+git reset HEAD^ (缓存区退回, HEAD^^退回到之前两次操作前,也就是commit两次前, HEAD~100,退回到前100次)
+这里git reset --hard *****可以回退到置零未知
+git log(查看log,但是退回的后面的不可见)
+git log --pretty=oneline
+git reflog(所有的修改的记录)
+git rm (移除文件,工作区和缓存区,除非用reset退回到原来的状态,否则不可逆)
+git diff (查看文件的改动)
+git status查看仓库当前的状态
+git init(初始化git的仓库)
+
+git push -u ** master
+
+###创建分支
+git checkout -b dev  #创建并切换到dev分支 -b表示切换的意思
+上面的命令相当于
+git branch dev
+git checkout dev
+
+git branch 命令可以查看分支,当前分支前面会有一个*
+git checkout master 切换到master分治
+git merge dev #合并分支成果到master上面
+git branch -d dev #删除dev分支
+
+git branch <name> 创建分治
+git checkout <name> 切换分治
+git checkout -b <name> 查看创建分支
+git merge <name> 合并分支
+git branch -d 删除分支
+
+当合并有冲突的时候git会把有冲突的两部分显示,必须手动调整
+git log --graph # 可以看到分支合并图
+
+合并分治的fast forward的模式,在删除分支之后就会丢失分支的信息,
+禁用fast forward的模式,在merge的时候会生成一个新的commit.
+--no-ff的方式进行git merge的时候会生成一个新的commit
+e.g.
+git merge --no-ff -m "merge with no-ff" dev
+
+git log --graph --pretty=oneline --abbrev-commit
+
+stash 功能
+当一个分支工作没有完,需要进行下一个工作的时候
+git stash
+git stash list #查看工作现场
+stash工作现场的内容发现
+1, git stash pop 恢复的同时把stash的内容删除
+2, git stash apply, 恢复之后不善除,调用 git stash drop删除内容
+
+多次stash的时候,利用git stash apply stash@{#} #表示恢复的stash的编号.
+
+没有合并过的分支需要强制删除 -D采用大D
+git branch -D <name>
+
+查看远程库的信息:
+git remote
+显示详细信息:
+git remote -v
+
+多人协作
+推送子集的修改: git push origin <branch-name> 
+推送失败,远程比本地新:git pull 合并
+合并冲突,解决冲突本地提交
+冲突解决 git push origin <branch-name>
+git pull提示 no tracking information (git pull <remote> <branch>)
+进行设置 git branch --set-upstream-to <branch-name> origin/<branch-name>
+
+本地创建和远程对应的分支: git checkout -b branch-name origin/branch-name
+
+
+
