@@ -71,4 +71,4 @@ git pull提示 no tracking information (git pull <remote> <branch>)
 本地创建和远程对应的分支: git checkout -b branch-name origin/branch-name
 
 
-
+git rebase: 可以将本地未push的分叉提交历史整理成一条直线.
