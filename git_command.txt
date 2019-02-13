@@ -72,3 +72,58 @@ git pull提示 no tracking information (git pull <remote> <branch>)
 
 
 git rebase: 可以将本地未push的分叉提交历史整理成一条直线.
+
+标签管理:这里对标签做相应的管理工作
+git tag <name>就可以为当前分治大一个新的标签
+git tag 可以查看所有的标签.
+git tag <name> <commit_id> 给之前的某次提交打上一个标签
+标签的输出是按照字母序进行显示
+git show <tagname> 查看标签的详细信息
+标签是和commit有关的,如果一个commit出现在多个分支上面,那么这些分支都会带有这个标签.
+git tag -a <tagname> -m "..."可以指定标签信息.
+
+git push origin <tagname> 推送一个本地标签
+git push origin --tags 推送未推送的本地标签
+git tag -d <tagname> 删除一个本地标签
+git push origin :refs/tags/<tagname> 删除一个远程标签鞍,注意冒号前面的空格不能省略
+git push origin :to-del-branch
+git push origin :<branch>/<tag>
+tag是全局的tag,不是针对某一个分支的,而是针对某一个commit_id的.
+
+git config --global color.ui true 让Git显示颜色
+git config --global user.name "name"
+git config --global user.email "email" 配置name和email
+
+git忽略特殊文件
+.gitignore 里面汉的文件名都会忽略,里面本身已经定义了一些规则
+当无法在git当中添加文件时,可以用-f强制
+git add -f <name>
+git check-ignore -v <name> 检查gitignore当中哪个规则导致忽略<name>的问题
+
+配置别名
+git config --global alias.st status staus的别名为st
+git config --global alias.co checkout checkout的别名为co
+--global 表示全局参数,表明此电脑的所有git仓库都有小
+
+git reset HEAD file表明unstage的操作,也就是把缓存区(暂存取)的修改撤销掉
+配置别名 git config --global alias.unstage 'reset HEAD'
+git config --global alias.last 'log -l'显示最后一次提交的信息,别名设计为last
+
+--global 针对的是当前用户,如果不加就只对本地仓库有作用
+每个仓库当好总的配置文件多放在了.git/config当中
+
+查看用户的配置信息 
+git config --global --list 全局
+git config --local --list本地
+local的在.git/config中,global的在用户主目录下面的.gitconfig中
+
+创建git服务器
+adduser git 创建git用户
+收集公钥(id_rsa.pub), 放入(/home/git/.ssh/authorized_keys)
+git init --bare sample.git 选定一个目录作为Git仓库/srv/sample.git,srv下面输入该命令,建立裸仓库,裸仓库没有工作区
+chown -R git:git sample.git 把owner改为git,并且不让用户直接修改工作区
+禁用shell登录
+将/etc/passwd中的
+git:x:1001:1001:,,,:/home/git:bin/bash改为git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
+克隆仓库 
+git clone git@server:srv/sample.git
